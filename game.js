@@ -1,65 +1,20 @@
 
-
-//Initial Time
-let seconds = 0,
-  minutes = 0;
-//Initial moves and win count
-let movesCount = 0,
-  winCount = 0;
-const cards = document.querySelectorAll('.memory-card');
-const timeValue = document.getElementById("time");
-const moves = document.getElementById("movesCount");
-//For timer
-const timeGenerator = () => {
-  seconds += 1;
-  //minutes logic
-  if (seconds >= 60) {
-    minutes += 1;
-    seconds = 0;
-  }
-  //format time before displaying
-  let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
-  let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
-  timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-};
-function displayMovesCount() {
-    document.getElementById("movesCount").innerHTML = `<span>Moves:</span>${movesCount}`;
-}
-function displayTimeCount() {
-    document.getElementById("time").innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
-} interval = setInterval(timeGenerator, 1000);
-//For calculating moves
-const movesCounter = () => {
-    movesCount += 1;
-    moves.innerHTML = `<span>Moves:</span>${movesCount}`;
-  };
-
-//   // 1. Create the button
-// const button = document.createElement("button");
-// button.innerHTML = "Start";
-
-
-
-// // 3. Add event handler
-//  button.addEventListener ("click", resetBoard );
-
-  
-// var GameScore = new Array(1).fill(['Round','Player 1', 'Player 2', 'Round Winner']);
-// GameScore[currentRound] =[currentRound, movesCount, 0, gameWinner]
-
-
-// console.log(GameScore);
-
-
 let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
-// let interval;
+var P1 = 0;
+var P2 = 0;
+let currentPlayer = 'P1';
+
 // Create function to flip the card
 function flipCard() {
     if(lockBoard)return;
     if(this === firstCard) return
     this.classList.add('flip');
+    if(currentPlayer === 'P1') {
+      P1++
+    }
+    else {P2++};
 
 if(!hasFlippedCard) {
     // first click
@@ -115,13 +70,47 @@ function checkForMatch() {
 //     console.log('matched');
 // console.log(firstCard.dataset.framework); 
 // console.log(secondCard.dataset.framework); 
+//Initial Time
+let seconds = 0,
+  minutes = 0;
+//Initial moves and win count
+let movesCount = 0,
+  winCount = 0;
+const cards = document.querySelectorAll('.memory-card');
+const timeValue = document.getElementById("time");
+const moves = document.getElementById("movesCount");
+//For timer
+const timeGenerator = () => {
+  seconds += 1;
+  //minutes logic
+  if (seconds >= 60) {
+    minutes += 1;
+    seconds = 0;
+  }
+  //format time before displaying
+  let secondsValue = seconds < 10 ? `0${seconds}` : seconds;
+  let minutesValue = minutes < 10 ? `0${minutes}` : minutes;
+  timeValue.innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+};
+function displayMovesCount() {
+    document.getElementById("movesCount").innerHTML = `<span>Moves:</span>${movesCount}`;
+}
+function displayTimeCount() {
+    document.getElementById("time").innerHTML = `<span>Time:</span>${minutesValue}:${secondsValue}`;
+} interval = setInterval(timeGenerator, 1000);
+//For calculating moves
+const movesCounter = () => {
+    movesCount += 1;
+    moves.innerHTML = `<span>Moves:</span>${movesCount}`;
+  };
 
     function resetBoard() {
         hasFlippedCard = false;
         lockBoard = false;
         firstCard = null;
         secondCard = null;
-        // movesCount = 0;
+       P1 = 0;
+       P2 = 0;
     }
 
     (function shuffle() {
@@ -130,24 +119,33 @@ function checkForMatch() {
       card.style.order = randomPos;
       });  
     })();
+   
 
-    // If there are no more cards that we can flip, we won the game
-  //  if(hasFlippedCard=== true){
-  //   console.log("You Won!");
-  //  }
-  var turn = 1;
-  function playerAction(elem) {
-    if(elem.innerHTML != "")return;
-  if(turn == 1) {
-    elem.innerHTML = 
-    document.getElementById("messagesection").innerHTML = "Player 2 turn";
-    turn = 2;
-  }
-  else if(turn = 2) {
-    elem.innerHTML = 
-    document.getElementById("messagesection").innerHTML = "Player 1 turn";
-    turn = 1;
-  }
-  }
-
+   
+    let flag = 0
 cards.forEach(card => card.addEventListener('click', flipCard))
+
+if(P1 > P2) {
+  console.log('P2');
+}
+else if (P1 < P2) {
+  console.log('P1');
+}
+else if (P1 === P2) {
+  console.log('Draw');
+}
+function changePlayer(){
+
+  cards.forEach(card => {
+ let flag = 0
+    if(card.className === 'memory-card') {
+      // we have still cards unflipped , atleast 1
+      flag = 1
+    }
+  })
+  // if all cards flipped
+  if(flag === 0) {
+  currentPlayer = 'P2';
+  resetBoard();
+  } 
+}
