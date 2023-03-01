@@ -97,7 +97,7 @@ button:hover {
 .memory-game {
 box-sizing: content-box;
 width: 700px;;
-height: 650px;
+height: 600px;
 margin-top: 10px;
 display: flex;
 padding: 3em ;
@@ -108,7 +108,7 @@ perspective: 1000px;
 }
 
 .stats-container {
-    text-align: right;
+    text-align: left;
     margin-bottom: 1.2em;
   }
   .stats-container span {
@@ -116,6 +116,8 @@ perspective: 1000px;
   }
 #movesCount {
   font-style: normal;
+  
+
 }
 #time {
   font-style: normal;
@@ -155,27 +157,6 @@ perspective: 1000px;
 .front-face {
     transform: rotateY(180deg);
 }
-/* .win {
-    width: 150px;
-    height: 50px;
-    border:none;
-    position: absolute;
-    top: 100px;
-    left: 1500px;
-    color: black;
-    background-color: rgb(220, 255, 205);
-    border-radius: 4px;
-    border: 3px solid blue;
-    box-shadow: inset 0 0 0 0 #6f00fc;
-    transition: ease-out 0.3s;
-    font-size: 2rem;
-
-}
-.win:hover {
-    box-shadow: inset 200px 0 0 0 #6f00fc;
-    cursor: pointer;
-    color: #fcc700;
-} */
 
 
 
